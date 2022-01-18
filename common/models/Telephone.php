@@ -35,6 +35,7 @@ class Telephone extends \yii\db\ActiveRecord
             [['type_id', 'company_id', 'name', 'amount', 'description', 'display_size', 'image'], 'required'],
             [['type_id', 'company_id', 'amount'], 'integer'],
             [['name', 'description', 'display_size', 'image'], 'string', 'max' => 255],
+            [['image'],'file','skipOnEmpty'=>true,'extensions'=>['jpg','jpeg','png','svg'],'maxSize'=>1024*1024*2]
         ];
     }
 
@@ -53,5 +54,19 @@ class Telephone extends \yii\db\ActiveRecord
             'display_size' => Yii::t('app', 'Display Size'),
             'image' => Yii::t('app', 'Image'),
         ];
+    }
+     public function upload($file)
+    {
+       if ($file) {
+        $dir = Yii::getAlias('@backend') ."/web/uploads/partners/";
+        $randomName = Yii::$app->security->generateRandomString();
+        $image_name = $randomName .".". $file->extension;
+        if(is_dir($dir))
+            if ($file->saveAs($dir . $image_name)) {
+                $this->image = $image_name;
+                return true;
+            }
+            return false;
+        }
     }
 }

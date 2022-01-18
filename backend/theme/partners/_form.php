@@ -9,7 +9,7 @@ use common\models\TelephoneCompany;
 /* @var $this yii\web\View */
 /* @var $model common\models\Partners */
 /* @var $form yii\widgets\ActiveForm */
-$region_list = ArrayHelper::map(TelephoneCompany::find()->all(), 'id', 'region');
+$region_list = ArrayHelper::map(TelephoneCompany::find()->all(), 'region', 'region');
 ?>
 
 <div class="partners-form">

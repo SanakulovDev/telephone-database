@@ -49,12 +49,15 @@ class Partners extends \yii\db\ActiveRecord
     public function upload($file)
     {
        if ($file) {
-        $dir = Yii::getAlias('@app') . "/web/uploads/partners/";
+        $dir = Yii::getAlias('@backend') ."/web/uploads/partners/";
         $randomName = Yii::$app->security->generateRandomString();
-        $image_name = $randomName . $file->extension;
-        if ($file->saveAs($dir . $image_name)) {
-            $this->image = $image_name;
+        $image_name = $randomName .".". $file->extension;
+        if(is_dir($dir))
+            if ($file->saveAs($dir . $image_name)) {
+                $this->image = $image_name;
+                return true;
+            }
+            return false;
         }
     }
-}
 }

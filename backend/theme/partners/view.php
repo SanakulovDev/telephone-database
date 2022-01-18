@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Create'), ['create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -32,7 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'region',
-            'image',
+            [
+                'attribute'=>'image',
+                'label'=>'Image',
+                'format'=>'raw',
+                'value'=>function($model){
+                    $alias = Yii::getAlias('@web/uploads/partners/');
+
+                    return Html::img($alias.$model->image,['width'=>120]);
+                }
+            ]
         ],
     ]) ?>
 

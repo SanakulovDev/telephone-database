@@ -13,7 +13,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        "template/bootstrap/bootstrap.min.css",
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
         "template/select2/select2.min.css",
         "template/owlcarousel/owl.carousel.min.css",
         "template/lightcase/lightcase.css",
@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $js = [
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", 
         "https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js",
         "http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js",
         "template/bootstrap/popper.min.js",
