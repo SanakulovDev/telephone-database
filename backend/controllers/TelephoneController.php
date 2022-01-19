@@ -7,6 +7,7 @@ use common\models\TelephoneSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * TelephoneController implements the CRUD actions for Telephone model.
@@ -70,8 +71,10 @@ class TelephoneController extends Controller
         $model = new Telephone();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            $file = UploadedFile::getInstance($model, 'image');
+            if ($model->load($this->request->post())) {
+                if($model->upload($file) && $model->save())
+                    return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -93,7 +96,9 @@ class TelephoneController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $file  = UploadedFile::getInstance($model ,'image');
+            if($model->upload($file) && $model->save())
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

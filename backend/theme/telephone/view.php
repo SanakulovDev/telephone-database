@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Create'), 'create',  ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -36,7 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'amount',
             'description',
             'display_size',
-            'image',
+            [
+                'attribute'=>'image',
+                'format'=>'raw',
+                'value' =>  function($model){
+                       $alias = "@web/uploads/telephones/".$model->image;
+                       return Html::img($alias,['class'=>'img-fluid','width'=>250]); 
+                }
+            ]
         ],
     ]) ?>
 

@@ -35,7 +35,7 @@ class Telephone extends \yii\db\ActiveRecord
             [['type_id', 'company_id', 'name', 'amount', 'description', 'display_size', 'image'], 'required'],
             [['type_id', 'company_id', 'amount'], 'integer'],
             [['name', 'description', 'display_size', 'image'], 'string', 'max' => 255],
-            [['image'],'file','skipOnEmpty'=>true,'extensions'=>['jpg','jpeg','png','svg'],'maxSize'=>1024*1024*2]
+            [['image'],'file','skipOnEmpty'=>true,'extensions'=>['jpg','jpeg','png','svg','jfif'],'maxSize'=>1024*1024*2]
         ];
     }
 
@@ -58,7 +58,7 @@ class Telephone extends \yii\db\ActiveRecord
      public function upload($file)
     {
        if ($file) {
-        $dir = Yii::getAlias('@backend') ."/web/uploads/partners/";
+        $dir = Yii::getAlias('@backend') ."/web/uploads/telephones/";
         $randomName = Yii::$app->security->generateRandomString();
         $image_name = $randomName .".". $file->extension;
         if(is_dir($dir))

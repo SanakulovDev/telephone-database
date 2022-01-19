@@ -74,7 +74,6 @@ class PartnersController extends Controller
             $file = UploadedFile::getInstance($model, 'image');
             if ($model->load($this->request->post()) ) {
                 if($model->upload($file)) {
-                    // vd(11234);
                     if ($model->save()) {
                         return $this->redirect(['view', 'id' => $model->id]);
                     }
@@ -101,8 +100,12 @@ class PartnersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $file = UploadedFile::getInstance($model, 'image');
+            if($model->upload($file) && $model->save()){
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

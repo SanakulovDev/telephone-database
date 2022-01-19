@@ -32,7 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'region',
-            'image',
+             [
+                'attribute'=>'image',
+                'format'=>'raw',
+                'value' => function($model){
+                    $alias = "@web/uploads/partners/".$model->image;
+                    return  Html::img($alias,['class'=>'img-fluid','width'=>120]);
+                }
+             ],   
             [
                 'class' => ActionColumn::className(),
             ],

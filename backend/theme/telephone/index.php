@@ -36,7 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'amount',
             //'description',
             //'display_size',
-            //'image',
+            [
+                'attribute'=>'image',
+                'format' => 'raw',
+                'value' => function($model){
+                    $alias  = "@web/uploads/telephones/".$model->image;
+                    return Html::img($alias,['class'=>'img-fluid','width'=>120]);
+                }
+            ],
             [
                 'class' => ActionColumn::className(),
             ],
